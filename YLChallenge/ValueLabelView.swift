@@ -10,12 +10,19 @@ import UIKit
 
 class ValueLabelView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    var value: Int = 0 {
+        didSet {
+            valueLabel.text = String(value)
+            self.alpha = 0.0
+            self.isHidden = false
+            
+            UIView.animate(withDuration: 1.0) { 
+                self.alpha = 1.0
+            }
+        }
     }
-    */
+    @IBOutlet var valueLabel: UILabel!
+    
 
 }

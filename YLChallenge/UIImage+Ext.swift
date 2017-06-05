@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    func defaultAvatar() {
-        
+    class func defaultAvatar() -> UIImage {
+        let image = UIImage(named:"GithubMark")!
+        return image
+//        return UIImage()
     }
 }

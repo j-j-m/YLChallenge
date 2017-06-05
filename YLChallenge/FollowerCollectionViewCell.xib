@@ -1,19 +1,57 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FollowerCollectionViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FollowerCollectionViewCell" customModule="YLChallenge" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                <rect key="frame" x="0.0" y="0.0" width="100" height="130"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GithubMark" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-hj-9CH" customClass="AvatarImageView" customModule="YLChallenge" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="103"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="hWW-hj-9CH" secondAttribute="height" multiplier="100:103" id="3Sx-xD-Frz"/>
+                            <constraint firstAttribute="width" constant="100" id="nZN-Bu-PrG"/>
+                        </constraints>
+                    </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QN0-1S-Rck">
+                        <rect key="frame" x="0.0" y="100" width="100" height="30"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hWW-hj-9CH" secondAttribute="trailing" id="E3H-Wd-eGB"/>
+                <constraint firstItem="hWW-hj-9CH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="M8u-Bf-UtY"/>
+                <constraint firstItem="QN0-1S-Rck" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WJ0-DX-j81"/>
+                <constraint firstItem="hWW-hj-9CH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Y7t-Ox-QJc"/>
+                <constraint firstItem="QN0-1S-Rck" firstAttribute="top" secondItem="hWW-hj-9CH" secondAttribute="bottom" constant="-3" id="f2Y-q0-3wg"/>
+                <constraint firstAttribute="bottom" secondItem="QN0-1S-Rck" secondAttribute="bottom" id="s1W-fP-APC"/>
+                <constraint firstAttribute="trailing" secondItem="QN0-1S-Rck" secondAttribute="trailing" id="wmB-o3-FiR"/>
+            </constraints>
+            <size key="customSize" width="100" height="130"/>
+            <connections>
+                <outlet property="imageView" destination="hWW-hj-9CH" id="sdu-BY-hgk"/>
+                <outlet property="label" destination="QN0-1S-Rck" id="Upo-uI-YYS"/>
+            </connections>
+            <point key="canvasLocation" x="59" y="94"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="GithubMark" width="560" height="560"/>
+    </resources>
 </document>

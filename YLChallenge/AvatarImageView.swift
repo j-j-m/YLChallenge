@@ -8,14 +8,36 @@
 
 import UIKit
 
-class AvatarImageView: UIImageView {
+@IBDesignable class AvatarImageView: UIImageView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBInspectable var cornerRadius: CGFloat = 50.0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+            layer.masksToBounds = cornerRadius > 0
+        }
     }
-    */
-
+    
+    @IBInspectable var fadeDuration: Double = 0.13
+    
+    override var image: UIImage? {
+        get {
+            return super.image
+        }
+        set(newImage) {
+            if let img = newImage {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(self.fadeDuration)
+                
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                
+                super.layer.add(transition, forKey: kCATransition)
+                super.image = img
+                
+                CATransaction.commit()
+            } else {
+                super.image = nil
+            }
+        }
+    }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YLChallenge/WebService.swift"
+            timestampString = "518331145.24212"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "getUserData(user:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YLChallenge.WebService.(getUserData (user : Swift.String, completion : (YLChallenge.User) -&gt; ()) -&gt; ()).(closure #2)"
+                  moduleName = "YLChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/YLChallenge/YLChallenge/WebService.swift"
+                  timestampString = "518331868.728884"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YLChallenge.WebService.(getUserData (user : Swift.String, completion : (YLChallenge.User) -&gt; ()) -&gt; ()).(closure #2)"
+                  moduleName = "YLChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/YLChallenge/YLChallenge/WebService.swift"
+                  timestampString = "518331868.731423"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "472">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
