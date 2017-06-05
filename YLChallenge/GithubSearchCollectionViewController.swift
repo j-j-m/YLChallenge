@@ -28,6 +28,8 @@ class GithubSearchCollectionViewController: UICollectionViewController {
     var searchTerm = ""
     var page = 1 // to keep track of the currently fetched page
     
+    var searching = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +41,7 @@ class GithubSearchCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UINib(nibName:"FollowerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
         
-        setupStandardNav()
+        setupSearchBar(focused: true)
         
     }
     
@@ -62,9 +64,11 @@ class GithubSearchCollectionViewController: UICollectionViewController {
                                                            target: self,
                                                            action: #selector(GithubSearchCollectionViewController.setupSearchBar))
         navigationItem.rightBarButtonItem = searchItem
+        
+        searching = false
     }
     
-    func setupSearchBar() {
+    func setupSearchBar(focused: Bool = false) {
         navigationItem.rightBarButtonItem = nil
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search Github"
@@ -78,9 +82,17 @@ class GithubSearchCollectionViewController: UICollectionViewController {
             textField.textColor = .white
             textField.keyboardAppearance = .dark
             textField.returnKeyType = .default
+            
+            if focused {
+                textField.becomeFirstResponder()
+            }
         }
+    
+        searching = true
         
         self.navigationItem.titleView = searchBar
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,6 +108,10 @@ class GithubSearchCollectionViewController: UICollectionViewController {
             }
         }
         
+    }
+    
+    func dismissKeyboard(){
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
     }
     
     // MARK: UICollectionViewDataSource
@@ -159,12 +175,19 @@ class GithubSearchCollectionViewController: UICollectionViewController {
 //    }
     
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if searching {
+            dismissKeyboard()
+            setupStandardNav()
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
         //FIXME: - there is a more view specific way to this... 
         //but to get visuals up to snuff this suffices
         
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+        dismissKeyboard()
 
         let follower = self.follower(at: indexPath)
         performSegue(withIdentifier: Constants.Segue.userDetail, sender: follower)
