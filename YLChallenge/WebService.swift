@@ -74,7 +74,7 @@ final class WebService{
             //TODO: - this should be after all data loads... needs refactor
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if error != nil {
-                print(error)
+//                print(error)
                 return
             }
             let result = data.flatMap(resource.build)
@@ -128,7 +128,7 @@ extension WebService {
             })
             
             loadResource(resource: followersResource, completion: { data in
-                print(data)
+          
                 if let data = data {
                     var followers = [Follower]()
                     for json in data {

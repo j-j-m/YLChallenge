@@ -147,7 +147,7 @@ class GithubSearchCollectionViewController: UICollectionViewController {
         if let url = follower.avatarURL {
             WebService.shared.retrieveAvatarFromUrl(url) { image in
                 DispatchQueue.main.async {
-                    cell.imageView.image = image
+                    cell.image = image
                 }
             }
         }
@@ -179,12 +179,14 @@ class GithubSearchCollectionViewController: UICollectionViewController {
 //    }
     
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searching {
-            dismissKeyboard()
-            setupStandardNav()
-        }
-    }
+    //this didnt behave well... tapping return works for now
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if searching {
+//            dismissKeyboard()
+//            setupStandardNav()
+//        }
+//    }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        

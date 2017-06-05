@@ -10,6 +10,13 @@ import UIKit
 
 class FollowerCollectionViewCell: UICollectionViewCell {
 
+    
+    var image = UIImage.defaultAvatar() {
+        didSet {
+            imageView.image = image
+        }
+    }
+    
     @IBOutlet var imageView: AvatarImageView!
     @IBOutlet var label: UILabel!
     
