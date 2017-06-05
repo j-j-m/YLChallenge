@@ -8,13 +8,21 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+
 
 class GithubSearchCollectionViewController: UICollectionViewController {
     
     struct Constants {
         struct Segue {
             static let userDetail = "UserDetailSegue"
+        }
+        
+        struct Cell {
+            static let follower = "FollowerCollectionViewCell"
+        }
+        
+        struct Identifier {
+            static let cell = "FollowerCell"
         }
         
         
@@ -33,12 +41,8 @@ class GithubSearchCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
-        // Register cell
-       // self.collectionView!.register(FollowerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.register(UINib(nibName:"FollowerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UINib(nibName:Constants.Cell.follower, bundle: nil), forCellWithReuseIdentifier: Constants.Identifier.cell)
         
         
         setupSearchBar(focused: true)
@@ -131,7 +135,7 @@ class GithubSearchCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FollowerCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifier.cell, for: indexPath) as! FollowerCollectionViewCell
         let paddingSpace = sectionInsets.left
         let cellDim = collectionView.bounds.width/CGFloat(itemsPerRow) - paddingSpace*2
         
@@ -259,6 +263,7 @@ extension GithubSearchCollectionViewController: UISearchBarDelegate {
     
     func search(_ term:String) {
             self.searchTerm = term
+        
             WebService.shared.getFollowers(user: term, atPage: page) { followers in
                 DispatchQueue.main.async {
                     self.followers = followers

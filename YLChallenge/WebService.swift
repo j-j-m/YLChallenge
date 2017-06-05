@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-
+//MARK: - Auth
+/// Used for github auth to get around those pesky rate limits
 struct Auth {
     static let clientID = "272a4ad9bbc8f745589d"
     static let clientSecret = "2e0f9affa7ec8b949d12c93f96964012d03bb70a"
@@ -21,11 +22,15 @@ struct Auth {
     }
 }
 
-
+//MARK: - WebConfig
+/// configuration for service...
 struct WebConfig {
     static let resultsPerPage = 100
 }
 
+
+//MARK: - Resource
+/// Web resource and parsing
 struct Resource<T> {
     let url: URL
     let build: (Data) -> T?
@@ -33,28 +38,41 @@ struct Resource<T> {
 
 
 
+/// so we dont have to write this out everywhere...
 typealias JSON = [String: AnyObject]
 
 
-
+//MARK: - WebService
+/// Singleton webservice class
 final class WebService{
     
     private init() {
-        avatarCache.countLimit = 50
+        avatarCache.countLimit = 100
     }
     
     //MARK: Shared Instance
     
+
     static let shared: WebService = WebService()
     
+    //MARK: - Datasource
     
+    /// LRU Cache to try and keep memory usage to a minimum
     var avatarCache = LRUCache<NSURL,UIImage>()
     
     
+    /// load a resource from the web
+    ///
+    /// - Parameters:
+    ///   - resource: contains url for resource and parsing method
+    ///   - completion: act on resource
     func loadResource<T>(resource: Resource<T>, completion: @escaping (T?) -> ()){
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         URLSession.shared.dataTask(with: resource.url) { data, response, error in
-            
+            //TODO: - this should be after all data loads... needs refactor
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if error != nil {
                 print(error)
                 return
@@ -65,8 +83,14 @@ final class WebService{
     }
 }
 
+// MARK: - Data Extensions
 extension WebService {
     
+    /// Get data for user
+    ///
+    /// - Parameters:
+    ///   - user: user login string
+    ///   - completion: completion for acting on user data
     func getUserData(user: String, completion: @escaping (User) -> ()) {
         let urlString = "https://api.github.com/users/\(user)"
         if let url = URL(string: Auth.wrap(urlString)) {
@@ -86,6 +110,14 @@ extension WebService {
         }
     }
     
+    
+    
+    /// Get followers for user
+    ///
+    /// - Parameters:
+    ///   - user: user login string
+    ///   - page: not implemented. would be page of results
+    ///   - completion: completion for acting on list of followers
     func getFollowers(user: String, atPage page: Int, completion: @escaping ([Follower]) -> ()) {
         let urlString = "https://api.github.com/users/\(user)/followers"
         if let url = URL(string: Auth.wrap(urlString)+"&per_page=\(WebConfig.resultsPerPage)&page=\(page)") {
@@ -114,18 +146,34 @@ extension WebService {
 }
 
 
+// MARK: - Image Extensions
 extension WebService {
     
+    /// helper to interface with cache
+    ///
+    /// - Parameters:
+    ///   - url: url for image
+    ///   - completion: what to do with image upon retrieval.
     func retrieveAvatarFromUrl(_ url: URL, completion: @escaping (UIImage) -> ()) {
         
         getCache(url: url, completion: completion)
     }
     
     
+    /// Set image in cache
+    ///
+    /// - Parameters:
+    ///   - url: url for image
+    ///   - image: the image
     func setCache(url:URL, image: UIImage) {
         avatarCache[url as NSURL] = image
     }
     
+    /// Get image from cache
+    ///
+    /// - Parameters:
+    ///   - url: url for image
+    ///   - completion: what to do with image upon retrieval
     func getCache(url:URL, completion: @escaping (UIImage) -> ()) {
         
         if let image = avatarCache[url as NSURL] {

@@ -22,6 +22,9 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage.defaultAvatar()
     }
     
+    /// set and animate label with follower data
+    ///
+    /// - Parameter follower: follower with data for label
     func setFollower(_ follower: Follower) {
 
         self.label.text = follower.login

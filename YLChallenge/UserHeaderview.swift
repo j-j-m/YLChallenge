@@ -43,6 +43,9 @@ class UserHeaderView: UITableViewHeaderFooterView {
     }
     
     
+    /// setup view given a user
+    ///
+    /// - Parameter user: user with data for labels
     func setupUser(user: User){
         nameLabel.text = user.name
         nameLabel.alpha = 0

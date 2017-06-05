@@ -14,7 +14,7 @@ class UserTableViewController: UITableViewController {
         didSet {
             if let f = follower {
                 
-                retrieveUser(for: f)
+             
                 if let url = f.avatarURL {
                     self.headerView.userLogin = f.login
                     WebService.shared.retrieveAvatarFromUrl(url, completion: { [weak self] (image) in
@@ -75,9 +75,7 @@ class UserTableViewController: UITableViewController {
     }
     
     
-    func retrieveUser(for follower:Follower) {
-        
-    }
+    
     
     
     

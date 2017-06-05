@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable class AvatarImageView: UIImageView {
 
+    
+    /// corner radius for view
     @IBInspectable var cornerRadius: CGFloat = 50.0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -17,8 +19,10 @@ import UIKit
         }
     }
     
+    /// fade for transition
     @IBInspectable var fadeDuration: Double = 0.13
     
+    /// when setting image we should transition to the new image
     override var image: UIImage? {
         get {
             return super.image
